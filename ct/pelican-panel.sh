@@ -2,7 +2,7 @@
 source <(curl -s https://raw.githubusercontent.com/tteck/Proxmox/main/misc/build.func)
 # Copyright (c) 2021-2024 tteck
 # Author: tteck (tteckster)
-# Co-author: Rogue-King
+# Co-author: vrozaksen
 # License: MIT
 # https://github.com/tteck/Proxmox/raw/main/LICENSE
 
@@ -20,9 +20,9 @@ EOF
 header_info
 echo -e "Loading..."
 APP="Pelican-Panel"
-var_disk="8"
+var_disk="2"
 var_cpu="1"
-var_ram="1024"
+var_ram="512"
 var_os="debian"
 var_version="12"
 variables
