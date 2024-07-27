@@ -23,6 +23,7 @@ $STD apt-get install -y unzip
 $STD apt-get install -y git
 $STD apt-get install -y gnupg
 $STD apt-get install -y nginx
+$STD apt-get install -y lsb-release
 msg_ok "Installed Dependencies"
 
 msg_info "Installing PHP"
