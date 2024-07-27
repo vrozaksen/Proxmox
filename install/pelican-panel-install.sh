@@ -69,7 +69,7 @@ server {
     listen 80;
     server_name _;
 
-    root /app/public;
+    root /var/www/pelican/public;
     index index.html index.htm index.php;
     charset utf-8;
 
@@ -91,8 +91,7 @@ server {
 
     location ~ \.php$ {
         fastcgi_split_path_info ^(.+\.php)(/.+)$;
-        # the fastcgi_pass path needs to be changed accordingly when using CentOS
-        fastcgi_pass 127.0.0.1:9000;
+        fastcgi_pass unix:/run/php/php8.3-fpm.sock;
         fastcgi_index index.php;
         include fastcgi_params;
         fastcgi_param PHP_VALUE "upload_max_filesize = 100M \n post_max_size=100M";
