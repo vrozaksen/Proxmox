@@ -63,7 +63,7 @@ php artisan down
 curl -L https://github.com/pelican-dev/panel/releases/latest/download/panel.tar.gz | sudo tar -xzv
 chmod -R 755 storage/* bootstrap/cache
 export COMPOSER_ALLOW_SUPERUSER=1
-composer install --no-dev --optimize-autoloader
+composer install --no-dev --optimize-autoloader --no-progress
 php artisan view:clear
 php artisan config:clear
 php artisan migrate --seed --force
@@ -79,5 +79,6 @@ build_container
 description
 
 msg_ok "Completed Successfully!\n"
-echo -e "${APP} should be reachable by going to the following URL.
+echo -e "This app requires additional steps, please go to https://pelican.dev/docs/panel/getting-started#environment-configuration \n
+        "Then ${APP} should be reachable by going to the following URL.
          ${BL}http://${IP}:80${CL} \n"

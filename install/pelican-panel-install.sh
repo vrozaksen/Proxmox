@@ -27,34 +27,26 @@ $STD apt-get install -y lsb-release
 msg_ok "Installed Dependencies"
 
 msg_info "Installing PHP"
-wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
-echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/php.list
+$STD wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
+$STD echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/php.list
 $STD apt-get update
 $STD apt-get install -y php8.3 php8.3-{gd,mysql,mbstring,bcmath,xml,curl,zip,intl,sqlite3,fpm}
 msg_ok "Installed PHP"
 
 msg_info "Installing Composer"
-curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer
+$STD curl -sS https://getcomposer.org/installer | $STD sudo php -- --install-dir=/usr/local/bin --filename=composer
 msg_ok "Installed Composer"
 
 msg_info "Downloading Panel"
 mkdir -p /var/www/pelican
 cd /var/www/pelican
-curl -L https://github.com/pelican-dev/panel/releases/latest/download/panel.tar.gz | sudo tar -xzv
+$STD curl -L https://github.com/pelican-dev/panel/releases/latest/download/panel.tar.gz | $STD sudo tar -xzv
 chmod -R 755 storage/* bootstrap/cache/
 msg_ok "Downloaded Panel"
 
 msg_info "Installing Panel"
 export COMPOSER_ALLOW_SUPERUSER=1
-composer install --no-dev --optimize-autoloader
-php artisan p:environment:setup
-php artisan p:environment:database
-read -r -p "Would you like to setup Mail? <y/N> " prompt
-if [[ ${prompt,,} =~ ^(y|yes)$ ]]; then
-  php artisan p:environment:mail
-fi
-php artisan migrate --seed --force
-php artisan p:user:make
+$STD composer install --no-dev --optimize-autoloader
 msg_ok "Installed Panel"
 
 msg_info "Setting up Crontab and Permissions"
